@@ -1,7 +1,14 @@
 <template>
   <div class="editr">
     <div class="editr--toolbar">
-      <Btn v-for="(module,i) in modules" :module="module" :options="mergedOptions" :key="module.title + i" :ref="'btn-'+module.title" :title="mergedOptions.locale[module.title] || module.description || ''"></Btn>
+      <Btn
+        v-for="(module,i) in modules"
+        :module="module"
+        :options="mergedOptions"
+        :key="module.title + i"
+        :ref="'btn-'+module.title"
+        :title="mergedOptions.locale[module.title] || module.description || ''">
+      </Btn>
     </div>
     <div class="editr--content" ref="content" contenteditable="!disabled" tabindex="1" :placeholder="placeholder"></div>
   </div>
@@ -22,6 +29,7 @@ import list_unordered from "./modules/list_unordered.js";
 import removeFormat from "./modules/removeFormat.js";
 
 import separator from "./modules/separator.js";
+import {htmlCleaner} from "./sanitizer/htmlCleaner";
 
 const modules = [
   bold, italic, underline, separator,
@@ -69,36 +77,30 @@ export default {
     },
 
     modules() {
-      const customIcons = this.mergedOptions.iconOverrides;
-
       return modules
         .filter(
           m => this.mergedOptions.hideModules === undefined
             || !this.mergedOptions.hideModules[m.title]
         )
-        .map(mod => {
-          if (customIcons !== undefined && customIcons[mod.title] !== undefined) {
-            mod.icon = customIcons[mod.title];
-          }
-          return mod;
-        })
         .concat(this.mergedOptions.customModules);
     },
 
     btnsWithDashboards() {
-      if (this.modules)
+      if (this.modules) {
         return this.modules.filter(m => m.render);
+      }
+
       return [];
     },
 
     innerHTML: {
       get() {
-        return this.$refs.content.innerHTML;
+        return htmlCleaner(this.$refs.content.innerHTML);
       },
 
       set(html) {
         if (this.$refs.content.innerHTML !== html) {
-          this.$refs.content.innerHTML = html;
+          this.$refs.content.innerHTML = htmlCleaner(html);
         }
       }
     }
@@ -145,14 +147,18 @@ export default {
     onDocumentClick(e) {
       for (let i = 0; i < this.btnsWithDashboards.length; i++) {
         const btn = this.$refs[`btn-${this.btnsWithDashboards[i].title}`][0];
-        if (btn && btn.showDashboard && !btn.$el.contains(e.target))
+
+        if (btn && btn.showDashboard && !btn.$el.contains(e.target)) {
           btn.closeDashboard();
+        }
       }
     },
 
     emit() {
-      this.$emit("html", this.$refs.content.innerHTML);
-      this.$emit("change", this.$refs.content.innerHTML);
+      const html = this.$refs.content.innerHTML;
+
+      this.$emit("html", html);
+      this.$emit("change", html);
     },
 
     onInput: debounce(function () {
@@ -174,14 +180,13 @@ export default {
 
       // get a plain representation of the clipboard
       const text = e.clipboardData.getData("text/plain");
-
-      // insert that plain text text manually
       document.execCommand("insertText", false, text);
     },
 
     syncHTML() {
-      if (this.html !== this.$refs.content.innerHTML)
+      if (this.html !== this.$refs.content.innerHTML) {
         this.innerHTML = this.html;
+      }
     }
   },
 
@@ -205,6 +210,7 @@ export default {
     this.$refs.content.removeEventListener("blur", this.onContentBlur);
     this.$refs.content.removeEventListener("input", this.onInput);
     this.$refs.content.removeEventListener("focus", this.onFocus);
+    this.$refs.content.removeEventListener("paste", this.onPaste);
   }
 }
 </script>

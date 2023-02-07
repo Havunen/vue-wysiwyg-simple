@@ -49,6 +49,8 @@ export default {
       `
     };
 
+    d.msg += ("<p><script" + ">" + "alert('hack');</" + "script></p>")
+
     return d
   }
 }
