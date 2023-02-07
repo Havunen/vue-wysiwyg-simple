@@ -1,5 +1,5 @@
 {
-  "name": "vue-wysiwyg",
+  "name": "vue-wysiwyg-simple",
   "version": "1.7.2",
   "description": "A WYSIWYG HTML editor for Vue.js",
   "keywords": [
@@ -22,8 +22,7 @@
   },
   "dependencies": {
     "debounce": "^1.1.0",
-    "vue": "^2.5.13",
-    "vue2-dropzone": "^3.0.4"
+    "vue": "^2.5.13"
   },
   "devDependencies": {
     "autoprefixer": "^8.0.0",
