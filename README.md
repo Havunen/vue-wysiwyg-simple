@@ -3,7 +3,7 @@
 vue-wysiwyg-simple has reduced number of features available to improve robustness of the editor
 
 - Fewer tags supported ( see the list at the end of the readme )
-- Only text copy-paste is supported
+- Only **text** copy-paste is supported
 - Drag and drop support removed
 - Upload image logic removed
 - IE11 is not supported
@@ -59,9 +59,6 @@ All keys are optional.
 
   // limit content height if you wish. If not set, editor size will grow with content.
   maxHeight: "500px",
-
-  // set to 'true' this will insert plain text without styling when you paste something into the editor.
-  forcePlainTextOnPaste: true,
 
   // specify editor locale, if you don't specify this, the editor will default to english.
   locale: 'hu'

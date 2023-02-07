@@ -173,10 +173,10 @@ export default {
       e.preventDefault();
 
       // get a plain representation of the clipboard
-      var text = e.clipboardData.getData("text/plain");
+      const text = e.clipboardData.getData("text/plain");
 
       // insert that plain text text manually
-      document.execCommand("insertHTML", false, text);
+      document.execCommand("insertText", false, text);
     },
 
     syncHTML() {
@@ -193,10 +193,7 @@ export default {
     this.$refs.content.addEventListener("focus", this.onFocus);
     this.$refs.content.addEventListener("input", this.onInput);
     this.$refs.content.addEventListener("blur", this.onContentBlur, {capture: true});
-
-    if (this.mergedOptions.forcePlainTextOnPaste === true) {
-      this.$refs.content.addEventListener("paste", this.onPaste);
-    }
+    this.$refs.content.addEventListener("paste", this.onPaste);
 
     this.$refs.content.style.maxHeight = this.mergedOptions.maxHeight;
   },
