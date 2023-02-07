@@ -4,13 +4,15 @@ function Emitter() {
   const self = {
     listeners: {},
     on: (eventName, handler) => {
-      if (self.listeners[eventName] === undefined)
+      if (!self.listeners[eventName]) {
         self.listeners[eventName] = [];
+      }
       self.listeners[eventName].push(handler);
     },
     emit: (eventName, ...args) => {
-      if (self.listeners[eventName] !== undefined)
+      if (self.listeners[eventName]) {
         self.listeners[eventName].forEach(handler => handler.apply(args));
+      }
     }
   }
 
@@ -29,22 +31,6 @@ emitter.options = {
     maxHeight: undefined,
     customModules: [],
     locale: english
-}
-
-emitter.utils = {
-  getHTMLOfSelection () {
-    if (window.getSelection !== undefined) {
-      const selection = window.getSelection();
-      if (selection.rangeCount > 0) {
-        const clonedSelection = selection.getRangeAt(0).cloneContents();
-        const div = document.createElement('div');
-        div.appendChild(clonedSelection);
-        return div.innerHTML;
-      }
-    }
-
-    return '';
-  }
 }
 
 export default emitter;

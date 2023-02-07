@@ -1,15 +1,16 @@
-<template lang="pug">
-.wrapper
-  wysiwyg(v-model="msg")
+<template>
+  <div class="wrapper">
+    <wysiwyg v-model="msg"></wysiwyg>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'app',
   data () {
-    return {
+    const d = {
       msg: `<p>Welcome to <b>vue-wysiwyg-simple</b>!</p>
-      <p>
+      <p onclick="alert('hack')">
         <br>
         <img src="https://static.pexels.com/photos/177809/pexels-photo-177809.jpeg">
       </p>
@@ -46,7 +47,9 @@ export default {
         </table>
       </p>
       `
-    }
+    };
+
+    return d
   }
 }
 </script>

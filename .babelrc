@@ -1,16 +1,8 @@
 {
   "presets": [
-    ["es2015", { "modules": false }],
-    "stage-2"
+    [
+      "@babel/preset-env"
+    ]
   ],
-  "plugins": ["transform-runtime"],
-  "comments": false,
-  "env": {
-    "test": {
-      "plugins": [ "istanbul" ]
-    },
-    "production": {
-      "presets": ["babili"]
-    }
-  }
+  "comments": false
 }

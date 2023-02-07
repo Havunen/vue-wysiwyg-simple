@@ -1,20 +1,20 @@
-var utils = require('./utils')
-var webpack = require('webpack')
-var config = require('../config')
-var merge = require('webpack-merge')
-var baseWebpackConfig = require('./webpack.base.conf')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+const utils = require('./utils');
+const webpack = require('webpack');
+const wbMerge = require('webpack-merge');
+const baseWebpackConfig = require('./webpack.base.conf');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const {VueLoaderPlugin} = require("vue-loader");
 
 
-
-module.exports = merge(baseWebpackConfig, {
+module.exports = wbMerge.merge(baseWebpackConfig, {
   module: {
     rules: utils.styleLoaders({ sourceMap: false })
   },
   // cheap-module-eval-source-map is faster for development
   devtool: false,
   plugins: [
+    new VueLoaderPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"'
@@ -29,7 +29,7 @@ module.exports = merge(baseWebpackConfig, {
       template: 'index.html',
       inject: true
     }),
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: 'style.css'
     }),
     new webpack.optimize.UglifyJsPlugin()

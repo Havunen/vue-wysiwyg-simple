@@ -6,6 +6,9 @@ vue-wysiwyg-simple has reduced number of features available to improve robustnes
 - Only text copy-paste is supported
 - Drag and drop support removed
 - Upload image logic removed
+- IE11 is not supported
+- Removed out of date development packages
+- Updated all develoopment packages
 
 ## Usage
 
@@ -69,7 +72,6 @@ Available Modules:
  - italic
  - underline
  - link
- - code
  - unorderedList
  - removeFormat
  - separator

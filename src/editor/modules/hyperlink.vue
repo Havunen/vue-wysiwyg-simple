@@ -11,7 +11,6 @@
 
         <button type="submit">Insert</button>
     </form>
-
 </template>
 
 <script>

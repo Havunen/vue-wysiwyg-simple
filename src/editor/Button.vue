@@ -1,21 +1,9 @@
-<template lang="pug">
-div(@mousedown="onBtnClick")
-	a(:class="'vw-btn-'+module.title", v-html="module.icon")
-
-	.dashboard(
-		v-show="showDashboard",
-		ref="dashboard"
-	)
-		component(
-      v-if="module.render",
-      v-once,
-      ref="moduleDashboard",
-      :is="module",
-      @exec="exec",
-      :uid="uid"
-      :options="options"
-    )
-
+<template>
+  <div @mousedown="onBtnClick"><a :class="'vw-btn-'+module.title" v-html="module.icon"></a>
+    <div class="dashboard" v-show="showDashboard" ref="dashboard">
+      <component v-if="module.render" v-once="v-once" ref="moduleDashboard" :is="module" @exec="exec" :uid="uid" :options="options"></component>
+    </div>
+  </div>
 </template>
 <script>
 import bus from 'src/editor/bus.js';

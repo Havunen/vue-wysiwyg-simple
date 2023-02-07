@@ -1,15 +1,15 @@
-var path = require('path')
-var utils = require('./utils')
-var webpack = require('webpack')
-var config = require('../config')
-var merge = require('webpack-merge')
-var baseWebpackConfig = require('./webpack.base.conf')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
-var env = config.build.env
+const path = require('path');
+const utils = require('./utils');
+const webpack = require('webpack');
+const config = require('../config');
+const wbMerge = require('webpack-merge');
+const baseWebpackConfig = require('./webpack.base.conf');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const {VueLoaderPlugin} = require("vue-loader");
+const env = config.build.env;
 
-var webpackConfig = merge(baseWebpackConfig, {
+const webpackConfig = wbMerge.merge(baseWebpackConfig, {
+  mode: 'production',
   module: {
     rules: utils.styleLoaders({
       sourceMap: config.build.productionSourceMap,
@@ -28,32 +28,33 @@ var webpackConfig = merge(baseWebpackConfig, {
     // chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
   plugins: [
+    new VueLoaderPlugin(),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
-    new webpack.DefinePlugin({
-      'process.env': env
-    }),
-    new UglifyJsPlugin({
-      parallel: true,
-      uglifyOptions: {
-        compress: {
-          warnings: false
-        },
-        output: {
-          comments: false
-        },
-        sourceMap: false
-      }
-    }),
+    // new webpack.DefinePlugin({
+    //   'process.env': env
+    // }),
+    // new UglifyJsPlugin({
+    //   parallel: true,
+    //   uglifyOptions: {
+    //     compress: {
+    //       warnings: false
+    //     },
+    //     output: {
+    //       comments: false
+    //     },
+    //     sourceMap: false
+    //   }
+    // }),
     // extract css into its own file
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: 'vueWysiwyg.css'
     })
   ]
-})
+});
 
 
 if (config.build.bundleAnalyzerReport) {
-  var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+  const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
   webpackConfig.plugins.push(new BundleAnalyzerPlugin())
 }
 
