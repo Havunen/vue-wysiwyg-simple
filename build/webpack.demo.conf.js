@@ -5,9 +5,11 @@ const baseWebpackConfig = require('./webpack.base.conf');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {VueLoaderPlugin} = require("vue-loader");
+const TerserPlugin = require("terser-webpack-plugin");
 
 
 module.exports = wbMerge.merge(baseWebpackConfig, {
+  mode: 'production',
   module: {
     rules: utils.styleLoaders({ sourceMap: false })
   },
@@ -32,6 +34,6 @@ module.exports = wbMerge.merge(baseWebpackConfig, {
     new MiniCssExtractPlugin({
       filename: 'style.css'
     }),
-    new webpack.optimize.UglifyJsPlugin()
+    new TerserPlugin(),
   ]
 })

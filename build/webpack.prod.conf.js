@@ -6,6 +6,7 @@ const wbMerge = require('webpack-merge');
 const baseWebpackConfig = require('./webpack.base.conf');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const {VueLoaderPlugin} = require("vue-loader");
+const TerserPlugin = require("terser-webpack-plugin");
 const env = config.build.env;
 
 const webpackConfig = wbMerge.merge(baseWebpackConfig, {
@@ -27,24 +28,17 @@ const webpackConfig = wbMerge.merge(baseWebpackConfig, {
     // filename: utils.assetsPath('js/[name].[chunkhash].js'),
     // chunkFilename: utils.assetsPath('js/[id].[chunkhash].js')
   },
+  externals: {
+    vue: 'vue',
+    debounce: 'debounce'
+  },
   plugins: [
     new VueLoaderPlugin(),
     // http://vuejs.github.io/vue-loader/en/workflow/production.html
-    // new webpack.DefinePlugin({
-    //   'process.env': env
-    // }),
-    // new UglifyJsPlugin({
-    //   parallel: true,
-    //   uglifyOptions: {
-    //     compress: {
-    //       warnings: false
-    //     },
-    //     output: {
-    //       comments: false
-    //     },
-    //     sourceMap: false
-    //   }
-    // }),
+    new webpack.DefinePlugin({
+      'process.env': env
+    }),
+    new TerserPlugin(),
     // extract css into its own file
     new MiniCssExtractPlugin({
       filename: 'vueWysiwyg.css'
