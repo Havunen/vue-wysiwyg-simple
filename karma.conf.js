@@ -28,7 +28,7 @@ module.exports = function(config) {
     // available preprocessors: https://www.npmjs.com/search?q=keywords:karma-preprocessor
     preprocessors: {
       'src/**/*.js': ['webpack'],
-      'tests/**/*.test.js': ['webpack']
+      'tests/**/*.js': ['webpack']
     },
 
     webpack: {

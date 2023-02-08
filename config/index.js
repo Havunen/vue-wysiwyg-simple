@@ -5,7 +5,7 @@ module.exports = {
   build: {
     env: require('./prod.env'),
     index: path.resolve(__dirname, '../dist/index.html'),
-    assetsRoot: path.resolve(__dirname, '../' + ((process.env.DIR.trim()) || "dist")),
+    assetsRoot: path.resolve(__dirname, '../' + ((process.env.DIR || "dist").trim())),
     assetsSubDirectory: './',
     assetsPublicPath: '/vue-wysiwyg-simple/',
     productionSourceMap: true,
