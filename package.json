@@ -20,6 +20,7 @@
   "style": "dist/vueWysiwyg.css",
   "scripts": {
     "dev": "node build/dev-server.js",
+    "test": "node ./node_modules/karma/bin/karma start ./karma.conf.js",
     "build": "npm run build:prod",
     "build:demo": "set BUILD=demo && set DIR=demo && node build/build.js",
     "build:prod": "rm -rf dist/* && set BUILD=prod && node build/build.js"
@@ -37,6 +38,10 @@
     "express": "^4.18.2",
     "html-webpack-plugin": "^5.5.0",
     "http-proxy-middleware": "^2.0.6",
+    "jasmine-core": "^4.5.0",
+    "karma-chrome-launcher": "^3.1.1",
+    "karma-jasmine": "^5.1.0",
+    "karma-webpack": "^5.0.0",
     "mini-css-extract-plugin": "^2.7.2",
     "opn": "^5.5.0",
     "sass": "^1.58.0",
