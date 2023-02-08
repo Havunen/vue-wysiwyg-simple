@@ -2,5 +2,5 @@ module.exports = {
 	title: "removeFormat",
 	action: ["removeFormat"],
 	description: "Remove formatting.",
-	icon: '<svg width="1792" height="1792" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg"><path d="M832 1408l336-384h-768l-336 384h768zm1013-1077q15 34 9.5 71.5t-30.5 65.5l-896 1024q-38 44-96 44h-768q-38 0-69.5-20.5t-47.5-54.5q-15-34-9.5-71.5t30.5-65.5l896-1024q38-44 96-44h768q38 0 69.5 20.5t47.5 54.5z"/></svg>'
+	icon: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1792 1792"><path d="m832 1408 336-384H400L64 1408h768zM1845 331q15 34 10 72t-31 65L928 1492q-38 44-96 44H64q-38 0-69-20t-48-55q-15-34-9-71t30-66L864 300q38-44 96-44h768q38 0 70 21t47 54z"/></svg>'
 }

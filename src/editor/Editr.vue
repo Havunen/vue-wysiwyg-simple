@@ -18,25 +18,18 @@
 import bus from 'src/editor/bus.js';
 import debounce from "debounce";
 import Btn from "./Button.vue";
-
 import bold from "./modules/bold.js";
 import italic from "./modules/italic.js";
 import underline from "./modules/underline.js";
-
 import hyperlink from "./modules/hyperlink.vue";
 import list_unordered from "./modules/list_unordered.js";
-
 import removeFormat from "./modules/removeFormat.js";
-
-import separator from "./modules/separator.js";
 import {htmlCleaner} from "./sanitizer/htmlCleaner";
 
 const modules = [
-  bold, italic, underline, separator,
-  separator,
+  bold, italic, underline,
   hyperlink,
-  list_unordered, separator,
-  separator,
+  list_unordered,
   removeFormat
 ];
 
