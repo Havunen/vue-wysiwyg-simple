@@ -3,9 +3,9 @@ module.exports = {
   locale_shorthand: ['en', 'english'],
   // Translations:
   bold: 'Bold',
-  link: 'Hyperlink',
+  link: 'Link',
   italic: 'Italic',
-  unorderedList: 'Bullet List',
+  unorderedList: 'List',
   removeFormat: 'Remove formatting.',
   separator: null,
   underline: 'Underline'

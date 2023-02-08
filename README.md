@@ -65,3 +65,11 @@ Available Modules:
 
 Available Locales:
  - english
+ - dutch
+ - german
+ - hungarian
+ - italian
+ - portuguese
+ - spanish
+ - finnish
+ - swedish
