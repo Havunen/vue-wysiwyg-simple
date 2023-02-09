@@ -60,7 +60,7 @@ function makeSanitizedCopy(node, doc) {
       newNode.appendChild(subCopy);
     }
 
-    if (newNode.nodeType === ELEMENT_NODE && newNode.innerHTML.trim() === "") {
+    if (newNode.nodeType === ELEMENT_NODE && tagName !== 'BR' && newNode.innerHTML.trim() === "") {
       return doc.createDocumentFragment();
     }
   } else {

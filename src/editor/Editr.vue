@@ -168,12 +168,12 @@ export default {
       this.$emit("blur", this.$refs.content);
     },
 
-    onPaste(e) {
+    async onPaste(e) {
       e.preventDefault();
-
       // get a plain representation of the clipboard
-      const text = e.clipboardData.getData("text/plain");
-      document.execCommand("insertText", false, text);
+      const text2 = e.clipboardData.getData("text/html");
+
+      document.execCommand("insertHTML", false, htmlCleaner(text2));
     },
 
     syncHTML() {

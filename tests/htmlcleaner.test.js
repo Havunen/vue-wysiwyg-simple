@@ -34,28 +34,23 @@ describe('htmlCleaner', () => {
     expect(result).toBe('<p><a target="_blank" rel="noopener noreferrer">test</a><a target="_blank" rel="noopener noreferrer">test1</a></p>')
   })
 
+  it('Should not remove BR tags', () => {
+    const result = htmlCleaner('<p>hello<br>again</p>')
+
+    expect(result).toBe('<p>hello<br>again</p>')
+  });
+
   it('Should clean email copy pasted HTML', () => {
     const result = htmlCleaner(emailTest)
 
     const resultWhitespaceRemoved =result.replace(/\s/g, "")
 
-    expect(resultWhitespaceRemoved).toBe('<div><div>URLLinkTitleInsert</div></div><div><p><span></span></p><p><span>________________________________________________________________________________</span></p><p><span>MicrosoftTeamsmeeting</span></p><p><b><span>Joinonyourcomputer,mobileapporroomdevice</span></b></p><p><span><ahref="https://www.google.com"target="_blank"rel="noopenernoreferrer"><span>Clickheretojointhemeeting</span></a></span></p><p><span>MeetingID:</span><span>112112112</span><span>Passcode:</span><span>asdasdi2</span></p><p><span><ahref="https://www.google.com"target="_blank"rel="noopenernoreferrer"><span>DownloadTeams</span></a>|<ahref="https://www.google.com"target="_blank"rel="noopenernoreferrer"><span>Joinontheweb</span></a></span></p><p><b><span>Orcallin(audioonly)</span></b></p><p><span><ahref="tel:123123312213#"target="_blank"rel="noopenernoreferrer"><span>+3231123#</span></a></span><span>Finland,Helsinki</span></p><p><span>PhoneConferenceID:</span><span>213123312321321#</span></p><p><span><ahref="https://www.google.com"target="_blank"rel="noopenernoreferrer"><span>Findalocalnumber</span></a>|<ahref="https://www.google.com"target="_blank"rel="noopenernoreferrer"><span>ResetPIN</span></a></span></p><p><span><ahref="https://www.google.com"target="_blank"rel="noopenernoreferrer"><span>LearnMore</span></a>|<ahref="https://www.google.com"target="_blank"rel="noopenernoreferrer"><span>Meetingoptions</span></a></span></p><p><span>________________________________________________________________________________</span></p><p><span></span></p></div>')
+    expect(resultWhitespaceRemoved).toBe('<div><div>URLLinkTitleInsert</div></div><div><p><span></span></p><p><span>________________________________________________________________________________</span></p><p><span>MicrosoftTeamsmeeting</span></p><p><b><span>Joinonyourcomputer,mobileapporroomdevice</span></b></p><p><span><ahref="https://www.google.com"target="_blank"rel="noopenernoreferrer"><span>Clickheretojointhemeeting</span></a></span></p><p><span>MeetingID:</span><span>112112112</span><span><br></span><span>Passcode:</span><span>asdasdi2</span></p><p><span><ahref="https://www.google.com"target="_blank"rel="noopenernoreferrer"><span>DownloadTeams</span></a>|<ahref="https://www.google.com"target="_blank"rel="noopenernoreferrer"><span>Joinontheweb</span></a></span></p><p><b><span>Orcallin(audioonly)</span></b></p><p><span><ahref="tel:123123312213#"target="_blank"rel="noopenernoreferrer"><span>+3231123#</span></a></span><span>Finland,Helsinki</span></p><p><span>PhoneConferenceID:</span><span>213123312321321#</span></p><p><span><ahref="https://www.google.com"target="_blank"rel="noopenernoreferrer"><span>Findalocalnumber</span></a>|<ahref="https://www.google.com"target="_blank"rel="noopenernoreferrer"><span>ResetPIN</span></a></span></p><p><span><ahref="https://www.google.com"target="_blank"rel="noopenernoreferrer"><span>LearnMore</span></a>|<ahref="https://www.google.com"target="_blank"rel="noopenernoreferrer"><span>Meetingoptions</span></a></span></p><p><span>________________________________________________________________________________</span></p><p><span></span></p></div>')
   })
 
   it('Should never remove text content', () => {
     const result = htmlCleaner(wysiwygExample)
 
-    expect(result.replaceAll(/\s/g, "")).toBe(`<p>Welcome to <b>vue-wysiwyg-simple</b>!</p>
-                <p>
-                  The editor is quite fast and lightweight. Elements are minimally styled.
-                </p>
-                    Numbered lists:
-                    Non-numbered lists:
-                        <li>Item #1</li>
-                        <li>Item #2</li>
-                      <ul>
-                        <li>Item #1</li>
-                        <li>Item #2</li>
-                      </ul>`.replace(/\s/g, ""))
+    expect(result.replaceAll(/\s/g, "")).toBe(`<p>Welcometo<b>vue-wysiwyg-simple</b>!</p><p><br></p><br><p>Theeditorisquitefastandlightweight.Elementsareminimallystyled.</p><br>Numberedlists:Non-numberedlists:<li>Item#1</li><li>Item#2</li><ul><li>Item#1</li><li>Item#2</li></ul>`.replace(/\s/g, ""))
   })
 })
