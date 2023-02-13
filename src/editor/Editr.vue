@@ -171,9 +171,16 @@ export default {
     async onPaste(e) {
       e.preventDefault();
       // get a plain representation of the clipboard
-      const text2 = e.clipboardData.getData("text/html");
+      let text = e.clipboardData.getData("text/html");
 
-      document.execCommand("insertHTML", false, htmlCleaner(text2));
+      if (text) {
+        document.execCommand("insertHTML", false, htmlCleaner(text));
+
+        return;
+      }
+
+      text = e.clipboardData.getData("text/plain");
+      document.execCommand("insertText", false, text);
     },
 
     syncHTML() {
