@@ -53,4 +53,10 @@ describe('htmlCleaner', () => {
 
     expect(result.replaceAll(/\s/g, "")).toBe(`<p>Welcometo<b>vue-wysiwyg-simple</b>!</p><p><br></p><br><p>Theeditorisquitefastandlightweight.Elementsareminimallystyled.</p><br>Numberedlists:Non-numberedlists:<li>Item#1</li><li>Item#2</li><ul><li>Item#1</li><li>Item#2</li></ul>`.replace(/\s/g, ""))
   })
+
+  it('Should remove unicode control characters', () => {
+    const result = htmlCleaner('\u0001\u0001\u0001\u0001\u0001\u0001'+wysiwygExample)
+
+    expect(result.replaceAll(/\s/g, "")).toBe(`<p>Welcometo<b>vue-wysiwyg-simple</b>!</p><p><br></p><br><p>Theeditorisquitefastandlightweight.Elementsareminimallystyled.</p><br>Numberedlists:Non-numberedlists:<li>Item#1</li><li>Item#2</li><ul><li>Item#1</li><li>Item#2</li></ul>`.replace(/\s/g, ""))
+  })
 })

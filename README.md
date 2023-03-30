@@ -3,7 +3,7 @@
 vue-wysiwyg-simple has reduced number of features available to improve robustness of the editor
 
 - Fewer tags supported ( see the list at the end of the readme )
-- All copy-pasted html is cleaned
+- All copy-pasted html is cleaned and unicode control characters removed
 - Drag and drop support removed
 - Upload image logic removed
 - IE11 is not supported

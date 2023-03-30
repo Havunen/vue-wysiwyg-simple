@@ -1,3 +1,5 @@
+import {cleanControlFlowCharacters} from './cleanControlFlowCharacters';
+
 const tagWhiteList = new Set([
   'A', 'B', 'BR', 'DIV',
   'I', 'LI', 'P', 'PRE',
@@ -87,6 +89,5 @@ export function htmlCleaner(input) {
 
   let resultElement = makeSanitizedCopy(div, document);
 
-  return (resultElement.innerHTML || '')
-    .replace(/&nbsp;/g, ' ');
+  return cleanControlFlowCharacters((resultElement.innerHTML || '').replace(/&nbsp;/g, ' '));
 }

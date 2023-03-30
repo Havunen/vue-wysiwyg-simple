@@ -25,6 +25,7 @@ import hyperlink from "./modules/hyperlink.vue";
 import list_unordered from "./modules/list_unordered.js";
 import removeFormat from "./modules/removeFormat.js";
 import {htmlCleaner} from "./sanitizer/htmlCleaner";
+import {cleanControlFlowCharacters} from './sanitizer/cleanControlFlowCharacters';
 
 const modules = [
   bold, italic, underline,
@@ -179,8 +180,8 @@ export default {
         return;
       }
 
-      text = e.clipboardData.getData("text/plain");
-      document.execCommand("insertText", false, text);
+      text = e.clipboardData.getData("text/plain") || '';
+      document.execCommand("insertText", false, cleanControlFlowCharacters(text));
     },
 
     syncHTML() {
